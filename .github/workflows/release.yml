@@ -21,10 +21,6 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install tools dependencies
-        run: npm install
-        working-directory: ./tools
-
       - name: Detect changed services
         id: detect
         run: |
