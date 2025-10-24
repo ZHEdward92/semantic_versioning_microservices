@@ -6,7 +6,7 @@ app.get('/', (req, res) => {
 });
 
 //Normally I just put port 3000 for every project.
-const PORT = 3000;
+const PORT = 3300;
 app.listen(PORT, () => {
   console.log(`Simple Node.js project Service B API running on http://localhost:${PORT}`);
 });

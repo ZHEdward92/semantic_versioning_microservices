@@ -1,7 +1,7 @@
 name: Semantic Release
 
 on:
-  push:
+  pull_request:
     branches: [main]
 
 jobs:
@@ -24,7 +24,9 @@ jobs:
       - name: Detect changed services
         id: detect
         run: |
-          CHANGED=$(node tools/detect-changes.js)
+          BASE=${{ github.event.pull_request.base.sha }}
+          HEAD=${{ github.event.pull_request.head.sha }}
+          CHANGED=$(node tools/detect-changes.js $BASE $HEAD)
           echo "changed_services=$CHANGED" >> $GITHUB_OUTPUT
 
   semantic-release:
