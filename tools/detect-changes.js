@@ -1,9 +1,9 @@
-// tools/detect-changes.js
 const { execSync } = require('child_process');
-const fs = require('fs');
+
+const [base, head] = process.argv.slice(2);
 
 try {
-  const output = execSync('git diff --name-only origin/main...HEAD', { encoding: 'utf-8' });
+  const output = execSync(`git diff --name-only ${base} ${head}`, { encoding: 'utf-8' });
   const changedFiles = output.split('\n').filter(Boolean);
 
   const changedServices = new Set();
@@ -16,7 +16,7 @@ try {
   });
 
   const result = Array.from(changedServices);
-  console.log(result.join(' ')); // Output space-separated list for GitHub Actions
+  console.log(result.join(' ')); // Output space-separated list
 } catch (error) {
   console.error('Error detecting changes:', error);
   process.exit(1);
